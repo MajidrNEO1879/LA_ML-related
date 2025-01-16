@@ -1,0 +1,107 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(72, 364)">
+<g>
+<line stroke="darkgrey" stroke-width="1" x1="0" x2="480" y1="NaN" y2="NaN"/>
+<line stroke="darkgrey" stroke-width="1" x1="NaN" x2="NaN" y1="0" y2="-340"/>
+</g>
+<g>
+<g>
+<rect fill="#00ff00" height="4" width="4" x="254.15728166024041" y="-223.0897827238499"/>
+<rect fill="#00ff00" height="4" width="4" x="287.38597690319693" y="-274.64484674157313"/>
+<rect fill="#00ff00" height="4" width="4" x="239.83154295675837" y="-209.10249460981106"/>
+<rect fill="#00ff00" height="4" width="4" x="233.3638248690721" y="-216.93227021957284"/>
+<rect fill="#00ff00" height="4" width="4" x="374.3773245006717" y="-220.6174644237603"/>
+<rect fill="#00ff00" height="4" width="4" x="359.79420388385455" y="-249.94157666706653"/>
+<rect fill="#00ff00" height="4" width="4" x="295.97076967372163" y="-242.39455440635385"/>
+<rect fill="#00ff00" height="4" width="4" x="357.38322682883916" y="-130.515136897597"/>
+<rect fill="#00ff00" height="4" width="4" x="331.9566509799295" y="-139.07747642563163"/>
+<rect fill="#00ff00" height="4" width="4" x="167.0468032399268" y="-248.79424433072128"/>
+<rect fill="#00ff00" height="4" width="4" x="395.2600352204158" y="-196.86366017085416"/>
+<rect fill="#00ff00" height="4" width="4" x="219.36007024014813" y="-185.97382435302103"/>
+<rect fill="#00ff00" height="4" width="4" x="297.10357200371067" y="-255.66780320287617"/>
+<rect fill="#00ff00" height="4" width="4" x="271.8740871436445" y="-244.51720346280706"/>
+<rect fill="#00ff00" height="4" width="4" x="299.9108080213562" y="-258.202860493029"/>
+<rect fill="#00ff00" height="4" width="4" x="312.5416973959207" y="-275.8343769784266"/>
+<rect fill="#00ff00" height="4" width="4" x="397.3114311876851" y="-207.0462138125434"/>
+<rect fill="#00ff00" height="4" width="4" x="187.05707643392697" y="-252.68161748752715"/>
+<rect fill="#00ff00" height="4" width="4" x="199.83263921143953" y="-216.7946020011696"/>
+<rect fill="#00ff00" height="4" width="4" x="238.73039754483904" y="-246.54089760382672"/>
+<rect fill="#00ff00" height="4" width="4" x="314.1309442028404" y="-215.47573323791252"/>
+<rect fill="#00ff00" height="4" width="4" x="243.5171577897" y="-208.2890140539844"/>
+<rect fill="#00ff00" height="4" width="4" x="339.6180775764658" y="-163.64728793276845"/>
+<rect fill="#00ff00" height="4" width="4" x="206.18161907327308" y="-198.72643700794794"/>
+</g>
+</g>
+<g transform="translate(380, -340)">
+<text font-size="12" text-anchor="start" x="0" y="0">
+Exam Results
+</text>
+</g>
+<g>
+<g>
+<circle cx="221.9286445627834" cy="-100.78365983815121" fill="#ff0000" r="2"/>
+<circle cx="168.3018181538924" cy="-223.3935603375279" fill="#ff0000" r="2"/>
+<circle cx="209.39201595176428" cy="-172.18026489207344" fill="#ff0000" r="2"/>
+<circle cx="241.8222251708613" cy="-120.44049340121282" fill="#ff0000" r="2"/>
+<circle cx="328.90664631142266" cy="-121.03965585529964" fill="#ff0000" r="2"/>
+<circle cx="138.49463849806787" cy="-221.06996297686013" fill="#ff0000" r="2"/>
+<circle cx="121.14684307290428" cy="-124.3691596513362" fill="#ff0000" r="2"/>
+<circle cx="143.38963507975487" cy="-206.55622774340367" fill="#ff0000" r="2"/>
+<circle cx="208.43191892775937" cy="-178.86160067831528" fill="#ff0000" r="2"/>
+<circle cx="160.94757494180445" cy="-201.64195272857148" fill="#ff0000" r="2"/>
+</g>
+</g>
+<g>
+<g>
+<line stroke="black" stroke-width="1" x1="0" x2="0" y1="0" y2="10"/>
+<line stroke="black" stroke-width="1" x1="160" x2="160" y1="0" y2="10"/>
+<line stroke="black" stroke-width="1" x1="320" x2="320" y1="0" y2="10"/>
+<line stroke="black" stroke-width="1" x1="480" x2="480" y1="0" y2="10"/>
+</g>
+<line stroke="black" stroke-width="1" x1="0" x2="480" y1="0" y2="0"/>
+<g>
+<text font-size="12" text-anchor="middle" x="0" y="20">
+0
+</text>
+<text font-size="12" text-anchor="middle" x="160" y="20">
+40
+</text>
+<text font-size="12" text-anchor="middle" x="320" y="20">
+80
+</text>
+<text font-size="12" text-anchor="middle" x="480" y="20">
+120
+</text>
+</g>
+<text font-size="12" text-anchor="middle" x="240" y="30">
+Test 1
+</text>
+</g>
+<g>
+<g>
+<line stroke="black" stroke-width="1" x1="0" x2="-10" y1="-0" y2="-0"/>
+<line stroke="black" stroke-width="1" x1="0" x2="-10" y1="-113.33333333333333" y2="-113.33333333333333"/>
+<line stroke="black" stroke-width="1" x1="0" x2="-10" y1="-226.66666666666666" y2="-226.66666666666666"/>
+<line stroke="black" stroke-width="1" x1="0" x2="-10" y1="-340" y2="-340"/>
+</g>
+<line stroke="black" stroke-width="1" x1="0" x2="0" y1="0" y2="-340"/>
+<g>
+<text dominant-baseline="middle" font-size="12" text-anchor="end" x="-15" y="-0">
+0
+</text>
+<text dominant-baseline="middle" font-size="12" text-anchor="end" x="-15" y="-113.33333333333333">
+40
+</text>
+<text dominant-baseline="middle" font-size="12" text-anchor="end" x="-15" y="-226.66666666666666">
+80
+</text>
+<text dominant-baseline="middle" font-size="12" text-anchor="end" x="-15" y="-340">
+120
+</text>
+</g>
+<text font-size="12" text-anchor="middle" transform="rotate(-90 -36 -170)" x="-36" y="-182">
+Test 2
+</text>
+</g>
+</g>
+</svg>
