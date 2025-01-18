@@ -10,8 +10,8 @@ use plotlib::{
     style::{PointMarker, PointStyle},
     view::{ContinuousView, View},
 };
-
-
+mod simple_regression;
+mod random_lr;
 
 fn load_data (path:&str) ->Dataset<f64, &'static str>
 {
@@ -117,54 +117,60 @@ fn iterate_with_values(
 }
 fn main()
 {
-    let train = load_data("./dataset_test_1.csv");
-    let test = load_data("./dataset_train_1.csv");
+    // let train = load_data("./dataset_test_1.csv");
+    // let test = load_data("./dataset_train_1.csv");
 
-    let features = train.nfeatures();
-    let targets = train.ntargets();
+    // let features = train.nfeatures();
+    // let targets = train.ntargets();
 
-    println!(
-        "training with {} samples, testing with {} samples, {} features and {} target",
-        train.nsamples(),
-        test.nsamples(),
-        features,
-        targets
-    );
+    // println!(
+    //     "training with {} samples, testing with {} samples, {} features and {} target",
+    //     train.nsamples(),
+    //     test.nsamples(),
+    //     features,
+    //     targets
+    // );
 
-    println!("plotting data...");
-    plot_data(&train);
+    // println!("plotting data...");
+    // plot_data(&train);
 
 
-    //
-    println!("training and testing model...");
-    let mut max_accuracy_confusion_matrix = iterate_with_values(&train, &test, 0.01, 100);
-    let mut best_threshold = 0.0;
-    let mut best_max_iterations = 0;
-    let mut threshold = 0.02;
+    // //
+    // println!("training and testing model...");
+    // let mut max_accuracy_confusion_matrix = iterate_with_values(&train, &test, 0.01, 100);
+    // let mut best_threshold = 0.0;
+    // let mut best_max_iterations = 0;
+    // let mut threshold = 0.02;
 
-    for max_iterations in (1000..5000).step_by(500) {
-        while threshold < 1.0 {
-            let confusion_matrix = iterate_with_values(&train, &test, threshold, max_iterations);
+    // for max_iterations in (1000..5000).step_by(500) {
+    //     while threshold < 1.0 {
+    //         let confusion_matrix = iterate_with_values(&train, &test, threshold, max_iterations);
 
-            if confusion_matrix.accuracy() > max_accuracy_confusion_matrix.accuracy() {
-                max_accuracy_confusion_matrix = confusion_matrix;
-                best_threshold = threshold;
-                best_max_iterations = max_iterations;
-            }
-            threshold += 0.01;
-        }
-        threshold = 0.02;
-    }
+    //         if confusion_matrix.accuracy() > max_accuracy_confusion_matrix.accuracy() {
+    //             max_accuracy_confusion_matrix = confusion_matrix;
+    //             best_threshold = threshold;
+    //             best_max_iterations = max_iterations;
+    //         }
+    //         threshold += 0.01;
+    //     }
+    //     threshold = 0.02;
+    // }
 
-    println!(
-        "most accurate confusion matrix: {:?}",
-        max_accuracy_confusion_matrix
-    );
-    println!(
-        "with max_iterations: {}, threshold: {}",
-        best_max_iterations, best_threshold
-    );
-    println!("accuracy {}", max_accuracy_confusion_matrix.accuracy(),);
-    println!("precision {}", max_accuracy_confusion_matrix.precision(),);
-    println!("recall {}", max_accuracy_confusion_matrix.recall(),);
+    // println!(
+    //     "most accurate confusion matrix: {:?}",
+    //     max_accuracy_confusion_matrix
+    // );
+    // println!(
+    //     "with max_iterations: {}, threshold: {}",
+    //     best_max_iterations, best_threshold
+    // );
+    // println!("accuracy {}", max_accuracy_confusion_matrix.accuracy(),);
+    // println!("precision {}", max_accuracy_confusion_matrix.precision(),);
+    // println!("recall {}", max_accuracy_confusion_matrix.recall(),);
+
+    //simple linear reg 
+    // simple_regression::simple_reg();
+
+    //random data distribution
+    random_lr::random_data_linear_reg();
 }
