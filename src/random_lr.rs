@@ -5,6 +5,8 @@ use std::fs::File;
 use std::io::{Write, BufWriter};
 use plotters::prelude::*;
 
+
+
 pub fn save_grid_to_csv(grid: &[Vec<f64>], b0_vals: &[f64], b1_vals: &[f64], filename: &str) {
     let file = File::create(filename).unwrap();
     let mut writer = BufWriter::new(file);
@@ -21,7 +23,6 @@ pub fn save_grid_to_csv(grid: &[Vec<f64>], b0_vals: &[f64], b1_vals: &[f64], fil
     }
 
 }
-
 pub fn random_data_linear_reg() {
     // Generating random data with normal distribution to simulate a linear regression
 
@@ -59,42 +60,55 @@ pub fn random_data_linear_reg() {
     let b0_range = (b_0 - 10.0, b_0 + 10.0);
     let b1_range = (b_1 - 10.0, b_1 + 10.0);
     let grid_size = 100;
-    let z = generate_grid(MSE_loss, &x, &y, b0_range, b1_range, grid_size);
-
-    // Print or save the grid (optional)
-    for row in z.iter() {
-        for val in row.iter() {
-            print!("{:.2} ", val);
-        }
-        // println!();
-    }
-    let z = generate_grid(MSE_loss, &x, &y, b0_range, b1_range, grid_size);
+   //let (b0_vals, b1_vals, z) = generate_grid(MSE_loss, &x, &y, b0_range, b1_range, grid_size);
 
     // Save the grid to a CSV file
-    save_grid_to_csv(&z, &b0_vals, &b1_vals, "mse_loss_grid.csv");
+    //save_grid_to_csv(&z, &b0_vals, &b1_vals, "mse_loss_grid.csv");
 
     // Create a 2D heatmap plot
-    let root = BitMapBackend::new("mse_loss_heatmap.png", (800, 600)).into_drawing_area();
-    root.fill(&WHITE).unwrap();
+    // let root = BitMapBackend::new("mse_loss_heatmap.png", (800, 600)).into_drawing_area();
+    // root.fill(&WHITE).unwrap();
 
-    let mut chart = ChartBuilder::on(&root)
-        .caption("MSE Loss Heatmap", ("sans-serif", 40))
-        .build_cartesian_2d(
-            b0_range.0..b0_range.1,
-            b1_range.0..b1_range.1,
-        )
-        .unwrap();
+    // let mut chart = ChartBuilder::on(&root)
+    //     .caption("MSE Loss Heatmap", ("sans-serif", 40))
+    //     .build_cartesian_2d(
+    //         b0_range.0..b0_range.1,
+    //         b1_range.0..b1_range.1,
+    //     )
+    //     .unwrap();
 
-    chart
-        .configure_mesh()
-        .x_desc("b0")
-        .y_desc("b1")
-        .draw()
-        .unwrap();
+    // chart
+    //     .configure_mesh()
+    //     .x_desc("b0")
+    //     .y_desc("b1")
+    //     .draw()
+    //     .unwrap();
 
-    // Create a heatmap
-    chart.draw_heatmap(&b0_vals, &b1_vals, &z).unwrap();
+    // // Normalize the loss values for color mapping
+    // let max_loss = z.iter().flatten().cloned().fold(f64::NEG_INFINITY, f64::max);
+    // let min_loss = z.iter().flatten().cloned().fold(f64::INFINITY, f64::min);
+
+    // // Create the series of points with colors based on MSE loss
+    // let series = b0_vals.iter().enumerate().flat_map(|(i, &b0)| {
+    //     b1_vals.iter().enumerate().map(move |(j, &b1)| {
+    //         let loss = z[i][j];  // Now `i` and `j` are copied, so no lifetime issue
+    //         let color = RGBColor(
+    //             ((loss - min_loss) / (max_loss - min_loss) * 255.0) as u8,
+    //             0,
+    //             ((1.0 - (loss - min_loss) / (max_loss - min_loss)) * 255.0) as u8,
+    //         );
+    //         (b0, b1, color)
+    //     })
+    // });
+    
+    // // Plot the series of points with colors using Circle
+    // chart
+    //     .draw_series(series.map(|(b0, b1, color)| {
+    //         Circle::new((b0, b1), 3, color.filled())
+    //     }))
+    //     .unwrap();
 }
+
 
 pub fn dot_product(arr1: &Vec<f64>, arr2: &Vec<f64>) -> f64 {
     let n = arr1.len();
@@ -112,25 +126,26 @@ pub fn MSE_loss(b_1: f64, b_0: f64, x: &[f64], y: &[f64]) -> f64 {
 }
 
 // Grids
-pub fn generate_linspace(start: f64, end: f64, num_points: usize) -> Vec<f64> {
-    let step = (end - start) / (num_points as f64 - 1.0);
-    (0..num_points).map(|i| start + i as f64 * step).collect()
-}
+// pub fn generate_linspace(start: f64, end: f64, num_points: usize) -> Vec<f64> {
+//     let step = (end - start) / (num_points as f64 - 1.0);
+//     (0..num_points).map(|i| start + i as f64 * step).collect()
+// }
 
-pub fn generate_grid<F>(MSE_loss: F, x: &[f64], y: &[f64], b0_range: (f64, f64), b1_range: (f64, f64), grid_size: usize) -> Vec<Vec<f64>>
-where
-    F: Fn(f64, f64, &[f64], &[f64]) -> f64,
-{
-    // Use Linspace::new to create an iterator and collect into a vector
-    let b0_vals: Vec<f64> = Array1::linspace(b0_range.0, b0_range.1, grid_size).to_vec();
-    let b1_vals: Vec<f64> = Array1::linspace(b1_range.0, b1_range.1, grid_size).to_vec();
+// pub fn generate_grid<F>(MSE_loss: F, x: &[f64], y: &[f64], b0_range: (f64, f64), b1_range: (f64, f64), grid_size: usize) ->(Vec<f64>, Vec<f64>, Vec<Vec<f64>>)
+// where
+//     F: Fn(f64, f64, &[f64], &[f64]) -> f64,
+// {
+//     // Use Linspace::new to create an iterator and collect into a vector
+//     let b0_vals: Vec<f64> = Array1::linspace(b0_range.0, b0_range.1, grid_size).to_vec();
+//     let b1_vals: Vec<f64> = Array1::linspace(b1_range.0, b1_range.1, grid_size).to_vec();
 
-    let mut z = vec![vec![0.0; b1_vals.len()]; b0_vals.len()];
-    for (i, &b0) in b0_vals.iter().enumerate() {
-        for (j, &b1) in b1_vals.iter().enumerate() {
-            z[i][j] = MSE_loss(b0, b1, x, y).ln(); 
-        }
-    }
+//     let mut z = vec![vec![0.0; b1_vals.len()]; b0_vals.len()];
+//     for (i, &b0) in b0_vals.iter().enumerate() {
+//         for (j, &b1) in b1_vals.iter().enumerate() {
+//             z[i][j] = MSE_loss(b0, b1, x, y).ln(); 
+//         }
+//     }
 
-    z
-}
+//     (b0_vals, b1_vals, z)
+// }
+

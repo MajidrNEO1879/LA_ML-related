@@ -12,7 +12,10 @@ use plotlib::{
 };
 mod simple_regression;
 mod random_lr;
-
+mod gradient_descent;
+mod simple_linear_reg_2;
+use plotters::prelude::*;
+use std::fs;
 fn load_data (path:&str) ->Dataset<f64, &'static str>
 {
     let mut reader = ReaderBuilder::new().delimiter(b',').from_path(path).expect("something went wrong");
@@ -172,5 +175,29 @@ fn main()
     // simple_regression::simple_reg();
 
     //random data distribution
-    random_lr::random_data_linear_reg();
+    //random_lr::random_data_linear_reg();
+    let z = simple_linear_reg_2::generating_data(50, 5.0);
+
+    if !fs::metadata("./images").is_ok() {
+        fs::create_dir("./images").unwrap();
+    }
+    //plottig the data:
+    let root_area = BitMapBackend::new("./images/2.6.png", (600, 400)).into_drawing_area();
+    root_area.fill(&WHITE).unwrap();
+
+    let mut ctx = ChartBuilder::on(&root_area)
+        .set_label_area_size(LabelAreaPosition::Left, 40)
+        .set_label_area_size(LabelAreaPosition::Bottom, 40)
+        .caption("scatter plot", ("sans-serif", 40))
+        .build_cartesian_2d(-10.0f64..11.0f64, -30.0f64..50.0f64)
+        .unwrap();
+
+    ctx.configure_mesh().draw().unwrap();
+
+    ctx.draw_series(
+        z
+            .iter()
+            .map(|point:&(f64,f64)| Circle::new(*point, 5, &BLUE)),
+    )
+    .unwrap();
 }
