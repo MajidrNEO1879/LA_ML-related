@@ -30,25 +30,25 @@ fn rand_n(n: i32) -> Vec<f64> {
 
 
 //closed form
-fn add_bias_term(X: &Array2<f64>) -> Array2<f64> {
-    let ones = Array1::<f64>::ones(X.nrows());
-    let X_b = ndarray::stack![ndarray::Axis(1), ones.insert_axis(ndarray::Axis(1)), X.view()];
-    X_b
-}
+// fn add_bias_term(X: &Array2<f64>) -> Array2<f64> {
+//     let ones = Array1::<f64>::ones(X.nrows());
+//     let X_b = ndarray::stack![ndarray::Axis(1), ones.insert_axis(ndarray::Axis(1)), X.view()];
+//     X_b
+// }
 
-fn linear_regression_closed_form(X: &Array2<f64>, y: &Array1<f64>) -> Array1<f64> {
-    let X_b = add_bias_term(X);
+// fn linear_regression_closed_form(X: &Array2<f64>, y: &Array1<f64>) -> Array1<f64> {
+//     let X_b = add_bias_term(X);
 
-    let Xt = X_b.t();
-    let Xt_X = Xt.dot(&X_b);
+//     let Xt = X_b.t();
+//     let Xt_X = Xt.dot(&X_b);
 
-    let Xt_X_inv = Xt_X.solve_into().expect("Matrix inversion failed"); //here?
+//     let Xt_X_inv = Xt_X.solve_into().expect("Matrix inversion failed"); //here?
 
-    // compute X_b^T * y (use .view() to treat y as a view)
-    let Xt_y = Xt.dot(&y.view());
+//     // compute X_b^T * y (use .view() to treat y as a view)
+//     let Xt_y = Xt.dot(&y.view());
 
-    let w = Xt_X_inv.dot(&Xt_y);
+//     let w = Xt_X_inv.dot(&Xt_y);
     
-    w
-}
+//     w
+// }
 

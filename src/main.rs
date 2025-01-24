@@ -178,10 +178,18 @@ fn main()
     //random_lr::random_data_linear_reg();
     let z = simple_linear_reg_2::generating_data(50, 5.0);
 
+
+
+
+
+
+
+    
+    //plottig the data:
     if !fs::metadata("./images").is_ok() {
         fs::create_dir("./images").unwrap();
     }
-    //plottig the data:
+    
     let root_area = BitMapBackend::new("./images/2.6.png", (600, 400)).into_drawing_area();
     root_area.fill(&WHITE).unwrap();
 
