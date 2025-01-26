@@ -10,9 +10,12 @@ use plotlib::{
     style::{PointMarker, PointStyle},
     view::{ContinuousView, View},
 };
-
-
-
+mod simple_regression;
+mod random_lr;
+mod gradient_descent;
+mod simple_linear_reg_2;
+use plotters::prelude::*;
+use std::fs;
 fn load_data (path:&str) ->Dataset<f64, &'static str>
 {
     let mut reader = ReaderBuilder::new().delimiter(b',').from_path(path).expect("something went wrong");
@@ -88,22 +91,121 @@ fn plot_data(
 }
 
 
+//training the model 
+fn iterate_with_values(
+    train: &DatasetBase<
+        ArrayBase<OwnedRepr<f64>, Dim<[usize; 2]>>,
+        ArrayBase<OwnedRepr<&'static str>, Dim<[usize; 2]>>,
+    >,
+    test: &DatasetBase<
+        ArrayBase<OwnedRepr<f64>, Dim<[usize; 2]>>,
+        ArrayBase<OwnedRepr<&'static str>, Dim<[usize; 2]>>,
+    >,
+    threshold: f64,
+    max_iterations: u64,
+) -> ConfusionMatrix<&'static str> {
+    let model = LogisticRegression::default()
+        .max_iterations(max_iterations)
+        .gradient_tolerance(0.0001)
+        .fit(train)
+        .expect("can train model");
+
+    let validation = model.set_threshold(threshold).predict(test);
+
+    let confusion_matrix = validation
+        .confusion_matrix(test)
+        .expect("can create confusion matrix");
+
+    confusion_matrix
+}
 fn main()
 {
-    let train = load_data("./dataset_test_1.csv");
-    let test = load_data("./dataset_train_1.csv");
+    // let train = load_data("./dataset_test_1.csv");
+    // let test = load_data("./dataset_train_1.csv");
 
-    let features = train.nfeatures();
-    let targets = train.ntargets();
+    // let features = train.nfeatures();
+    // let targets = train.ntargets();
 
-    println!(
-        "training with {} samples, testing with {} samples, {} features and {} target",
-        train.nsamples(),
-        test.nsamples(),
-        features,
-        targets
-    );
+    // println!(
+    //     "training with {} samples, testing with {} samples, {} features and {} target",
+    //     train.nsamples(),
+    //     test.nsamples(),
+    //     features,
+    //     targets
+    // );
 
-    println!("plotting data...");
-    plot_data(&train);
+    // println!("plotting data...");
+    // plot_data(&train);
+
+
+    // //
+    // println!("training and testing model...");
+    // let mut max_accuracy_confusion_matrix = iterate_with_values(&train, &test, 0.01, 100);
+    // let mut best_threshold = 0.0;
+    // let mut best_max_iterations = 0;
+    // let mut threshold = 0.02;
+
+    // for max_iterations in (1000..5000).step_by(500) {
+    //     while threshold < 1.0 {
+    //         let confusion_matrix = iterate_with_values(&train, &test, threshold, max_iterations);
+
+    //         if confusion_matrix.accuracy() > max_accuracy_confusion_matrix.accuracy() {
+    //             max_accuracy_confusion_matrix = confusion_matrix;
+    //             best_threshold = threshold;
+    //             best_max_iterations = max_iterations;
+    //         }
+    //         threshold += 0.01;
+    //     }
+    //     threshold = 0.02;
+    // }
+
+    // println!(
+    //     "most accurate confusion matrix: {:?}",
+    //     max_accuracy_confusion_matrix
+    // );
+    // println!(
+    //     "with max_iterations: {}, threshold: {}",
+    //     best_max_iterations, best_threshold
+    // );
+    // println!("accuracy {}", max_accuracy_confusion_matrix.accuracy(),);
+    // println!("precision {}", max_accuracy_confusion_matrix.precision(),);
+    // println!("recall {}", max_accuracy_confusion_matrix.recall(),);
+
+    //simple linear reg 
+    // simple_regression::simple_reg();
+
+    //random data distribution
+    //random_lr::random_data_linear_reg();
+    let z = simple_linear_reg_2::generating_data(50, 5.0);
+
+
+
+
+
+
+
+    
+    //plottig the data:
+    if !fs::metadata("./images").is_ok() {
+        fs::create_dir("./images").unwrap();
+    }
+    
+    let root_area = BitMapBackend::new("./images/2.6.png", (600, 400)).into_drawing_area();
+    root_area.fill(&WHITE).unwrap();
+
+    let mut ctx = ChartBuilder::on(&root_area)
+        .set_label_area_size(LabelAreaPosition::Left, 40)
+        .set_label_area_size(LabelAreaPosition::Bottom, 40)
+        .caption("scatter plot", ("sans-serif", 40))
+        .build_cartesian_2d(-10.0f64..11.0f64, -30.0f64..50.0f64)
+        .unwrap();
+
+    ctx.configure_mesh().draw().unwrap();
+
+    ctx.draw_series(
+        z
+            .iter()
+            .map(|point:&(f64,f64)| Circle::new(*point, 5, &BLUE)),
+    )
+    .unwrap();
 }

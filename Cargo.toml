@@ -7,6 +7,11 @@ edition = "2021"
 linfa = { version = "0.3.1", features = ["openblas-system"] }
 linfa-logistic = "0.3.1"
 ndarray = { version = "0.13", default-features = false }
+ndarray-linalg = "0.15"
 ndarray-csv = "0.4"
 csv = "1.1"
 plotlib = "0.5.1"
+rand = "0.8.5"
+rand_distr = "0.4.3"
+plotters = "0.3.7"
+seeded-random = "0.6.0"
